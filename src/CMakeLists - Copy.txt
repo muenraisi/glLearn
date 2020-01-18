@@ -1,0 +1,44 @@
+# 查找当前目录下的所有源文件
+
+include_directories("D:/Documents/IndieGame/openGL-externel/include")
+
+link_directories("D:/Documents/IndieGame/openGL-externel/lib")
+
+
+# 并将名称保存到 DIR_LIB_SRCS 变量
+
+aux_source_directory(. DIR_LIB_SRCS)
+
+# 生成链接库
+
+
+file( GLOB APP_SOURCES ./*.cxx )
+foreach( sourcefile ${APP_SOURCES} )
+    # I used a simple string replace, to cut off .cpp.
+    string( REPLACE ".cpp" "" src ${sourcefile} )
+    add_executable( ${src} ${sourcefile} )
+    # Make sure YourLib is linked to each app
+    target_link_libraries( ${src} opengl32 glfw3 glad )
+endforeach( sourcefile ${APP_SOURCES} )
+# add_executable(hello_window_clear hello_window_clear.cpp)
+# target_link_libraries(hello_window_clear opengl32 glfw3 glad)
+
+# add_executable(hello_triangle hello_triangle.cpp)
+# target_link_libraries(hello_triangle opengl32 glfw3 glad)
+
+# add_executable(hello_triangle_indexed hello_triangle_indexed.cpp)
+# target_link_libraries(hello_triangle_indexed opengl32 glfw3 glad)
+
+
+# add_executable(hello_triangle_exercise1 hello_triangle_exercise1.cpp)
+# target_link_libraries(hello_triangle_exercise1 opengl32 glfw3 glad)
+
+# add_executable(hello_triangle_exercise3 hello_triangle_exercise3.cpp)
+# target_link_libraries(hello_triangle_exercise3 opengl32 glfw3 glad)
+
+# add_executable(shaders_uniform shaders_uniform.cpp)
+# target_link_libraries(shaders_uniform opengl32 glfw3 glad)
+
+
+# add_executable(get_version get_version.cpp)
+# target_link_libraries(get_version opengl32 glfw3 glad)

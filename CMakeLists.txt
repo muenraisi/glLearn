@@ -6,6 +6,14 @@ cmake_minimum_required (VERSION 2.8)
 
 project (glLearn)
 
-# 添加 math 子目录
-
-add_subdirectory(src)
+file( GLOB APP_SOURCES src/*.cpp)
+#message(${APP_SOURCES})
+foreach( sourcefile ${APP_SOURCES} )
+    # I used a simple string replace, to cut off .cpp.
+    string( REPLACE ".cpp" "" temp ${sourcefile} )
+	string( REGEX REPLACE ".*/" "" src ${temp} )
+	message(${src})
+    add_executable( ${src} ${sourcefile} )
+    # Make sure YourLib is linked to each app
+    target_link_libraries( ${src} opengl32 glfw3 glad )
+endforeach( sourcefile ${APP_SOURCES} )
